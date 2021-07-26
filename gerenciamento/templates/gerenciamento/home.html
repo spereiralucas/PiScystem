@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load meus_filtros %}
+
+{% block conteudo %}
+
+<p>{{ now }}</p>
+
+<button><a href="{% url 'url_logar_usuario' %}">Login</a></button>
+<button><a href="{% url 'url_cadastrar_usuario' %}">Registre-se</a></button>
+
+{% endblock conteudo %}

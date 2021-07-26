@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+<h2 xmlns="http://www.w3.org/1999/html">Histórico de Aferições</h2>
+    <h5><br> <a href="{% url 'url_nova-afericao' %}">Incluir aferição</a> </h5>
+        <table class="table table-striped">  <!-- Monta a tabela -->
+            <thead class="thead-dark">  <!-- Monta o cabeçalho da tabela -->
+                <tr>
+                    <th scope="col">ID</th>  <!-- Monta as colunas -->
+                    <th scope="col">Data</th>
+                    <th scope="col">Quantidade</th>
+                    <th scope="col">Peso da Amostragem</th>
+                    <th scope="col">Categoria</th>
+                    <th scope="col">Observações</th>
+                    <td scope="col">Editar</td>
+                    <td scope="col">Excluir</td>
+                </tr>
+            </thead>
+            {%for afericao in afericoes %}
+            <tbody>
+                <tr>
+                    <td scope="row">{{ afericao.id }}</td>  <!-- Renderiza as linhas das tabelas do banco na tabela frontend -->
+                    <td scope="row">{{ afericao.data }}</td>
+                    <td scope="row">{{ afericao.quantidade_aferida }}</td>
+                    <td scope="row">{{ afericao.quantidade_aproximada }}</td>
+                    <td scope="row">{{ afericao.peso }}kg</td>
+                    <td scope="row">{{ afericao.categoria }}</td>
+                    <td scope="row">{{ afericao.observacoes }}</td>
+                    <td scope="row">
+                        <a href="{% url 'url_editar_afericao' afericao.id %}"> Editar</a>
+                    </td>
+                    <td scope="row">
+                        <a class="confirm-delete" href="{% url 'url_excluir_afericao' afericao.id %}">Excluir</a>
+                            <!-- Criar campo de confirmação para exclusão. O script js abaixo não funcionou-->
+                            <!--<script (document).on('click', '.confirm-delete', function(){
+                                return confirm("Tem certeza que deseja deletar esta informação da base de dados?");
+                            }) </script> -->
+                    </td>
+                </tr>
+            </tbody>
+            {% endfor %}
+        </table>
+
+{% endblock conteudo %}
